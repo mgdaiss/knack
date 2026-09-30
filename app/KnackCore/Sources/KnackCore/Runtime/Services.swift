@@ -25,8 +25,11 @@ public struct PickedImage: Sendable, Equatable {
 }
 
 public protocol ImageInputService: Sendable {
-    /// Lets the user pick a photo (file picker, drop or Continuity Camera). Nil if cancelled.
+    /// Shows a file picker. Nil if cancelled.
     func pickImage() async throws -> PickedImage?
+    /// Normalizes a photo the user handed over another way (drag-drop, Continuity Camera):
+    /// decodes, downsizes and re-encodes it as JPEG so only what's needed is sent.
+    func importImage(data: Data) async throws -> PickedImage
 }
 
 public protocol NotificationService: Sendable {

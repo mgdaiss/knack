@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
-# Builds a Release archive of Knack and exports a Developer ID–signed app.
+# Builds, signs, notarizes and staples a Developer ID release of Knack.
 #
-#   DEVELOPMENT_TEAM=ABCDE12345 scripts/build.sh
+#   DEVELOPMENT_TEAM=ABCDE12345 NOTARY_PROFILE=knack-notary scripts/build.sh
 #
-# Needs Xcode 16+ and XcodeGen (brew install xcodegen). Notarization is added in M6.
+# One-time setup for notarization (stores an app-specific password in your keychain):
+#   xcrun notarytool store-credentials knack-notary --apple-id you@example.com --team-id ABCDE12345
+# Leave NOTARY_PROFILE unset to skip notarization (e.g. for a local smoke build).
+#
+# Needs Xcode 16+ and XcodeGen (brew install xcodegen).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 APP_DIR="$ROOT/app"
 OUT="$APP_DIR/build"
 TEAM="${DEVELOPMENT_TEAM:?Set DEVELOPMENT_TEAM to your Apple team ID}"
+PROFILE="${NOTARY_PROFILE:-}"
 
 cd "$APP_DIR"
 xcodegen generate --quiet
@@ -44,4 +49,25 @@ xcodebuild -exportArchive \
   -exportOptionsPlist "$OUT/ExportOptions.plist" \
   -exportPath "$OUT/export"
 
-echo "Built: $OUT/export/Knack.app"
+APP="$OUT/export/Knack.app"
+codesign --verify --deep --strict --verbose=2 "$APP"
+
+if [[ -n "$PROFILE" ]]; then
+  echo "==> Notarize"
+  ditto -c -k --keepParent "$APP" "$OUT/Knack-notarize.zip"
+  xcrun notarytool submit "$OUT/Knack-notarize.zip" --keychain-profile "$PROFILE" --wait
+  xcrun stapler staple "$APP"
+  spctl --assess --type execute --verbose "$APP"
+else
+  echo "==> Skipping notarization (NOTARY_PROFILE not set)"
+fi
+
+echo "==> Package"
+ditto -c -k --keepParent "$APP" "$OUT/Knack.zip"
+hdiutil create -quiet -volname Knack -srcfolder "$APP" -ov -format UDZO "$OUT/Knack.dmg"
+if [[ -n "$PROFILE" ]]; then
+  xcrun notarytool submit "$OUT/Knack.dmg" --keychain-profile "$PROFILE" --wait
+  xcrun stapler staple "$OUT/Knack.dmg"
+fi
+
+echo "Built: $OUT/Knack.dmg"

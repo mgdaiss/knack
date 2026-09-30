@@ -13,6 +13,7 @@ struct SettingsView: View {
                 AccountSection()
                 UsageSection()
                 HelpersSection()
+                HotkeysSection()
                 PrivacySection()
                 #if DEBUG
                 DeveloperSection()
@@ -149,17 +150,62 @@ private struct HelpersSection: View {
     }
 }
 
+private struct HotkeysSection: View {
+    @State private var accessibility = AccessibilityPermission.isGranted
+
+    var body: some View {
+        SectionCard(title: "Shortcuts") {
+            HotkeyRow(title: "Say It Better", asset: "say-it-better", name: .sayItBetter)
+            HotkeyRow(title: "Explain This", asset: "explain-this", name: .explainThis)
+            HStack {
+                Label(accessibility ? "Accessibility is on" : "Accessibility is off, so shortcuts can't see your selection",
+                      systemImage: accessibility ? "checkmark.circle.fill" : "exclamationmark.circle")
+                    .font(Theme.Fonts.label)
+                Spacer()
+                if !accessibility {
+                    Button("Turn on") {
+                        AccessibilityPermission.requestPrompt()
+                        AccessibilityPermission.openSystemSettings()
+                    }
+                    .buttonStyle(SoftPillButtonStyle())
+                }
+            }
+        }
+        .task {
+            await AccessibilityPermission.waitUntilGranted()
+            accessibility = true
+        }
+    }
+}
+
 private struct PrivacySection: View {
     @Environment(AppModel.self) private var model
+    @AppStorage(SayItBetterSession.learnStyleKey) private var learnStyle = false
+    @State private var sampleCount = 0
 
     var body: some View {
         SectionCard(title: "Privacy") {
             Text("Knack never stores what you write or the photos you share. Your helpers' history stays on this Mac.")
                 .font(Theme.Fonts.body)
                 .foregroundStyle(Theme.Colors.muted)
-            Button("Clear history") { Task { await model.clearHistory() } }
+            Toggle(isOn: $learnStyle) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Say It Better: sound like me").font(Theme.Fonts.bodyBold)
+                    Text("Keeps up to \(StyleSampleStore.maxSamples) of your own messages on this Mac as style examples. \(sampleCount) saved.")
+                        .font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.muted)
+                }
+            }
+            .toggleStyle(.switch)
+            HStack {
+                Button("Clear style samples") {
+                    Task { await model.clearStyleSamples(); sampleCount = 0 }
+                }
                 .buttonStyle(SoftPillButtonStyle())
+                Button("Clear history") { Task { await model.clearHistory() } }
+                    .buttonStyle(SoftPillButtonStyle())
+            }
         }
+        .task { sampleCount = await model.styleSamples.count }
     }
 }
 

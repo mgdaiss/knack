@@ -35,3 +35,17 @@ Model IDs and prices weren't verifiable from the build environment (no access to
 - Fridge Chef tiers: the manifest has one tier (`vision-fast`). The recipe (text-only) call uses the same tier, since `model.vision` also covers text-only calls. That avoids adding `model.text` to a skill that doesn't read your text.
 - `skill.json` manifests stay in each skill's folder and are copied into `Knack.app/Contents/Resources/Skills/<Skill>/skill.json` by a build phase.
 - Debug builds are ad-hoc signed without the Sign in with Apple entitlement so they run without a team; use "Use a test account". Release builds carry the entitlement.
+
+## 2026-09-30 — M2–M6 build choices
+
+- **Skill engines live in KnackCore** (`Sources/KnackCore/Skills/`, `Routing/`): prompt building, response parsing, the Fridge Chef pipeline and ⌘K routing are plain Swift so they're unit-tested. Each skill's UI stays in `app/Knack/Skills/<Skill>/`.
+- **`Skill.handleRoute` takes an `AskRoute`** (skill ID, input, optional tone) instead of a bare string, so "make this nicer: …" can pre-select the tone.
+- **Panel focus order:** the panel is shown without becoming key, the selection is read (so a ⌘C fallback reaches the source app), then the panel takes key. On Replace it hides first so ⌘V lands in the source app.
+- **From ⌘K, Say It Better copies instead of replacing** — there's no selection to replace.
+- **⌘K routing:** deterministic first (colon patterns, route-example overlap), then a tiny `text-fast` call as `com.knack.router` that may only pick an installed skill. It never answers the question.
+- **"Sounds like you" is opt-in** (Settings ▸ Privacy), keeps up to 40 of the user's own originals on this Mac, and is never used for "Fix typos only".
+- **Fridge Chef photos** are downsized to 1600 px and re-encoded as JPEG (drops EXIF/GPS) before sending. The recipe call sends only item names.
+- **Continuity Camera** uses SwiftUI's `ImportFromDevicesCommands` + `importsItemProviders` (File ▸ Import from iPhone); there's no public API for a one-click in-window button.
+- **Needs you / Tonight** are static in Phase 1, as the spec allows. "This week" counts come from the local usage log.
+- **Menu bar icon** is an SF Symbol for now; swap in a template version of the logo glyph when design provides one.
+- **Sample fridge photo** (`fridge.jpg`) is a generated illustration, not a real photo — the build environment couldn't download images. Replace it with a real one for a meaningful live vision test.

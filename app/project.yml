@@ -19,6 +19,9 @@ settings:
 packages:
   KnackCore:
     path: KnackCore
+  KeyboardShortcuts:
+    url: https://github.com/sindresorhus/KeyboardShortcuts
+    from: 2.0.0
 
 targets:
   Knack:
@@ -30,6 +33,7 @@ targets:
           - "Skills/**/skill.json"
     dependencies:
       - package: KnackCore
+      - package: KeyboardShortcuts
     settings:
       base:
         PRODUCT_NAME: Knack

@@ -1,0 +1,5 @@
+{"items":[
+ {"name":"eggs","quantity":"8"},{"name":"milk"},{"name":"cheddar"},
+ {"name":"chicken thighs"},{"name":"spinach","useSoon":true},{"name":"peppers","quantity":"2"},
+ {"name":"yogurt"},{"name":"salsa"},{"name":"lemon"},{"name":"tortillas"}
+]}

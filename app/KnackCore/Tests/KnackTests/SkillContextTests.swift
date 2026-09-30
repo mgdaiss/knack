@@ -11,6 +11,7 @@ final class FakeSelection: SelectionService, @unchecked Sendable {
 
 struct FakeImages: ImageInputService {
     func pickImage() async throws -> PickedImage? { PickedImage(data: Data([1, 2, 3]), mimeType: "image/jpeg") }
+    func importImage(data: Data) async throws -> PickedImage { PickedImage(data: data, mimeType: "image/jpeg") }
 }
 
 @Suite("SkillContext enforces manifest permissions")

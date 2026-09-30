@@ -16,10 +16,16 @@ scripts/    build.sh (Release archive)
 
 | Milestone | State |
 |---|---|
-| M0 Project skeleton | Built. Needs a first run on a Mac (see below). |
-| M1 Runtime | Built and unit-tested (manifests, tiers, `ModelProvider` contract, usage log). |
-| M1b Knack Cloud | Built and tested locally. Payments intentionally off: $1,000 starter credit per account. Not yet deployed. |
-| M2–M6 | Not started. |
+| M0 Project skeleton | Written. Not yet compiled on a Mac. |
+| M1 Runtime | Built; core unit-tested on Linux (manifests, tiers, `ModelProvider` contract, usage log). |
+| M1b Knack Cloud | Built and tested locally. Payments off: $1,000 starter credit per account. Not deployed. |
+| M2 Say It Better | Written: ⌥Space panel, tones, Replace/Copy/Try again, AX + pasteboard fallback, opt-in "sounds like you". Engine and pasteboard restore unit-tested. |
+| M3 Explain This | Written: ⌥E panel, "What this means for you", one follow-up. Engine unit-tested. |
+| M4 Fridge Chef | Written: photo (drop / picker / iPhone), editable items, pantry, filters, three recipes, cook mode with timers. Pipeline tested with `Tests/KnackTests/Fixtures/fridge.jpg`. |
+| M5 Home + Discover + ⌘K | Written: dashboard columns, catalog-driven Discover, skill detail/install, ⌘K routing (tested). |
+| M6 Polish | Written: menu bar extra, empty states, character-voice errors, notarizing `scripts/build.sh`. |
+
+Everything under `app/Knack/` (the SwiftUI/AppKit layer) has never been compiled: there was no Mac in the build environment. Expect a round of compile fixes on first open in Xcode.
 
 ## Knack Cloud
 

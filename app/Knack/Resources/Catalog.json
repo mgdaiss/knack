@@ -1,0 +1,59 @@
+{
+  "hero": "com.knack.say-it-better",
+  "startHere": ["com.knack.explain-this", "com.knack.fridge-chef", "com.knack.bedtime-stories", "com.knack.the-decider"],
+  "entries": [
+    {
+      "id": "com.knack.say-it-better",
+      "name": "Say It Better",
+      "blurb": "Select any text, press ⌥Space, pick a tone. It fixes the words, you keep the credit.",
+      "asset": "say-it-better", "color": "#5B61C9", "tint": "#EEF0FB",
+      "howItWorks": [
+        { "title": "Select some text", "detail": "In Mail, Messages, Slack, Notes, a web form: anywhere you type." },
+        { "title": "Press ⌥Space and pick a tone", "detail": "Firmer but friendly, nicer, shorter, funnier, more formal, or just fix typos." },
+        { "title": "Replace it", "detail": "Press ↵ and the new version drops right in. Your clipboard is left exactly as it was." }
+      ],
+      "goodToKnow": ["Only the text you select is sent to the AI.", "Turn on \"Sounds like you\" in Settings and it learns your voice, on this Mac only."]
+    },
+    {
+      "id": "com.knack.explain-this",
+      "name": "Explain This",
+      "blurb": "Jargon, charts, fine print. Plain English, right where you are.",
+      "asset": "explain-this", "color": "#1E7A74", "tint": "#D8EFEC",
+      "howItWorks": [
+        { "title": "Select something confusing", "detail": "A bill, a contract clause, a medical letter, a dense email." },
+        { "title": "Press ⌥E", "detail": "Get a plain-English explanation, plus what it means for you." },
+        { "title": "Ask one follow-up", "detail": "Still unsure? Ask a quick question right in the panel." }
+      ],
+      "goodToKnow": ["Only the text you select is sent to the AI.", "It explains; it never changes your text."]
+    },
+    {
+      "id": "com.knack.fridge-chef",
+      "name": "Fridge Chef",
+      "blurb": "Snap your fridge. Three dinners you can make tonight.",
+      "asset": "fridge-chef", "color": "#E06A4E", "tint": "#FBE0D8",
+      "howItWorks": [
+        { "title": "Show it your fridge", "detail": "Drop in a photo, pick one, or take one with your iPhone." },
+        { "title": "Fix anything it got wrong", "detail": "Tap an item to rename or remove it, and tick what's in your pantry." },
+        { "title": "Pick a dinner and cook", "detail": "Cook mode shows one big step at a time, with timers." }
+      ],
+      "goodToKnow": ["Photos are shrunk and stripped of location data before they're sent.", "Only the item names are used to find recipes."]
+    },
+    { "id": "com.knack.bedtime-stories", "name": "Bedtime Stories", "blurb": "Your kids are the heroes. Illustrated and read aloud.", "asset": "bedtime-stories", "color": "#3A2F5C", "tint": "#E6E1F2", "comingSoon": true },
+    { "id": "com.knack.the-decider", "name": "The Decider", "blurb": "Two options in. A clear verdict out, and what would change it.", "asset": "the-decider", "color": "#2F8F6B", "tint": "#DCEFE5", "comingSoon": true },
+    { "id": "com.knack.form-filler", "name": "Form Filler", "blurb": "Never write your address on a form again.", "asset": "form-filler", "color": "#D99A2B", "tint": "#FBEBD0", "comingSoon": true },
+    { "id": "com.knack.paperwork", "name": "Paperwork", "blurb": "Bills and letters, filed and on time.", "asset": "paperwork", "color": "#4F8FC0", "tint": "#DDEBF6", "comingSoon": true },
+    { "id": "com.knack.tidy-my-mac", "name": "Tidy My Mac", "blurb": "A cleanup plan you approve, one tap at a time.", "asset": "tidy-my-mac", "color": "#E8839B", "tint": "#FBE1E8", "comingSoon": true }
+  ],
+  "moreToTry": [
+    { "name": "Fix It", "color": "#F6C9A8" },
+    { "name": "Plant Doctor", "color": "#BFE3C6" },
+    { "name": "Hard Talk Practice", "color": "#D7CCF2" },
+    { "name": "Toast Writer", "color": "#F9DFA0" },
+    { "name": "Trip Dreamer", "color": "#BCDDF2" },
+    { "name": "Song Maker", "color": "#F5C4D4" },
+    { "name": "Party Host", "color": "#FFD2B8" },
+    { "name": "Buy Smart", "color": "#CDE8B5" },
+    { "name": "Homework Helper", "color": "#C9D6F6" },
+    { "name": "Journal", "color": "#EBD9C4" }
+  ]
+}

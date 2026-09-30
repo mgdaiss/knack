@@ -2,21 +2,23 @@ import KnackCore
 import SwiftUI
 
 /// A first-party skill (SPEC §3.3). Skills reach services only through `SkillContext`.
-protocol Skill: Identifiable {
+@MainActor
+protocol Skill {
     /// Mirrors the skill's bundled `skill.json`.
     static var manifest: SkillManifest { get }
-    /// The applet window.
-    @MainActor func makeMainView(context: SkillContext) -> AnyView
+    /// The applet window, for skills with a `window` trigger.
+    func makeMainView(context: SkillContext) -> AnyView
     /// For hotkey skills.
     func handleHotkey(context: SkillContext) async
     /// From the ⌘K bar, with the input pre-filled.
-    func handleRoute(input: String, context: SkillContext) async
+    func handleRoute(_ route: AskRoute, context: SkillContext) async
 }
 
 extension Skill {
     var id: String { Self.manifest.id }
+    func makeMainView(context: SkillContext) -> AnyView { AnyView(EmptyView()) }
     func handleHotkey(context: SkillContext) async {}
-    func handleRoute(input: String, context: SkillContext) async {}
+    func handleRoute(_ route: AskRoute, context: SkillContext) async {}
 }
 
 extension SkillManifest {
