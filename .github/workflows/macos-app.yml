@@ -1,7 +1,7 @@
 name: macOS app
 
 # Builds Knack.app on a GitHub macOS runner and uploads it as a downloadable artifact.
-# Debug configuration: ad-hoc signed, talks to Knack Cloud at http://localhost:8787,
+# Debug configuration, universal (Intel + Apple Silicon): ad-hoc signed, talks to Knack Cloud at http://localhost:8787,
 # and shows "Use a test account" on the sign-in screen.
 on:
   push:
@@ -49,9 +49,17 @@ jobs:
             CODE_SIGN_IDENTITY=- \
             CODE_SIGN_STYLE=Manual \
             DEVELOPMENT_TEAM= \
+            ARCHS="arm64 x86_64" \
+            ONLY_ACTIVE_ARCH=NO \
             > build/xcodebuild.log 2>&1 || true
           grep -E "error:|warning: .*Knack/|BUILD (SUCCEEDED|FAILED)" build/xcodebuild.log || true
           test -d build/DerivedData/Build/Products/Debug/Knack.app
+
+      - name: Check it's universal (Intel + Apple Silicon)
+        working-directory: app/build/DerivedData/Build/Products/Debug
+        run: |
+          lipo -archs Knack.app/Contents/MacOS/Knack
+          lipo Knack.app/Contents/MacOS/Knack -verify_arch x86_64 arm64
 
       - name: Zip app
         working-directory: app/build/DerivedData/Build/Products/Debug
