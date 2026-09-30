@@ -39,7 +39,7 @@ jobs:
       - name: Build Knack.app
         working-directory: app
         run: |
-          set -o pipefail
+          mkdir -p build
           xcodebuild build \
             -project Knack.xcodeproj \
             -scheme Knack \
@@ -49,7 +49,8 @@ jobs:
             CODE_SIGN_IDENTITY=- \
             CODE_SIGN_STYLE=Manual \
             DEVELOPMENT_TEAM= \
-            2>&1 | tee build/xcodebuild.log | grep -E "error:|warning: .*Knack/|BUILD (SUCCEEDED|FAILED)" || true
+            > build/xcodebuild.log 2>&1 || true
+          grep -E "error:|warning: .*Knack/|BUILD (SUCCEEDED|FAILED)" build/xcodebuild.log || true
           test -d build/DerivedData/Build/Products/Debug/Knack.app
 
       - name: Zip app
