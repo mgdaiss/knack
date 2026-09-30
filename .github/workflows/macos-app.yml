@@ -1,0 +1,71 @@
+name: macOS app
+
+# Builds Knack.app on a GitHub macOS runner and uploads it as a downloadable artifact.
+# Debug configuration: ad-hoc signed, talks to Knack Cloud at http://localhost:8787,
+# and shows "Use a test account" on the sign-in screen.
+on:
+  push:
+    paths:
+      - "app/**"
+      - ".github/workflows/macos-app.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: macos-app-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Core unit tests
+        working-directory: app/KnackCore
+        run: swift test
+
+      - name: Generate Xcode project
+        working-directory: app
+        run: xcodegen generate
+
+      - name: Build Knack.app
+        working-directory: app
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project Knack.xcodeproj \
+            -scheme Knack \
+            -configuration Debug \
+            -destination 'platform=macOS' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGN_IDENTITY=- \
+            CODE_SIGN_STYLE=Manual \
+            DEVELOPMENT_TEAM= \
+            2>&1 | tee build/xcodebuild.log | grep -E "error:|warning: .*Knack/|BUILD (SUCCEEDED|FAILED)" || true
+          test -d build/DerivedData/Build/Products/Debug/Knack.app
+
+      - name: Zip app
+        working-directory: app/build/DerivedData/Build/Products/Debug
+        run: ditto -c -k --keepParent Knack.app "$GITHUB_WORKSPACE/Knack.zip"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Knack-app
+          path: Knack.zip
+          retention-days: 30
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcodebuild-log
+          path: app/build/xcodebuild.log
+          if-no-files-found: ignore
