@@ -1,0 +1,6 @@
+{
+  "com.knack.say-it-better": { "tiers": ["text-fast", "text-smart"], "maxCostPerRunUSD": 0.01 },
+  "com.knack.explain-this": { "tiers": ["text-fast", "text-smart"], "maxCostPerRunUSD": 0.01 },
+  "com.knack.fridge-chef": { "tiers": ["vision-fast"], "maxCostPerRunUSD": 0.02 },
+  "com.knack.router": { "tiers": ["text-fast"], "maxCostPerRunUSD": 0.002 }
+}

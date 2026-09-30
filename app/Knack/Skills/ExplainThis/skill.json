@@ -1,0 +1,15 @@
+{
+  "id": "com.knack.explain-this",
+  "name": "Explain This",
+  "tagline": "Select anything confusing, press ⌥E, get it in plain English.",
+  "character": { "asset": "explain-this", "color": "#1E7A74", "tint": "#D8EFEC" },
+  "category": "understanding",
+  "permissions": ["selection.read", "model.text"],
+  "never": ["selection.replace", "files.read", "email.read", "network.other"],
+  "triggers": [
+    { "type": "hotkey", "shortcut": "option+e" },
+    { "type": "route", "examples": ["what does this mean", "explain this", "in plain english", "I don't understand this"] }
+  ],
+  "model": { "tier": "text-fast", "maxCostPerRunUSD": 0.01 },
+  "version": "1.0.0"
+}

@@ -1,0 +1,44 @@
+name = "knack-cloud"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+
+# Non-secret config. Secrets (OPENROUTER_API_KEY) are set with `wrangler secret put`.
+[vars]
+# Comma-separated Sign in with Apple audiences (the app's bundle ID, plus any Services ID).
+APPLE_AUDIENCES = "com.knack.app"
+# Every new account gets this much prepaid credit. Payments are off, so this is the whole budget.
+STARTER_CREDIT_USD = "1000"
+# Guardrail: max spend per user per UTC day.
+DAILY_SPEND_CAP_USD = "10"
+# Charged = model cost * (1 + margin). 0 while we foot the bill.
+PRICE_MARGIN = "0"
+RATE_LIMIT_PER_MINUTE = "30"
+# Comma-separated OpenRouter model IDs to refuse (global kill switch).
+DISABLED_MODELS = ""
+# Enables POST /v1/auth/dev. Never true in production.
+ALLOW_DEV_AUTH = "false"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "knack"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+[env.staging]
+name = "knack-cloud-staging"
+
+[env.staging.vars]
+APPLE_AUDIENCES = "com.knack.app"
+STARTER_CREDIT_USD = "1000"
+DAILY_SPEND_CAP_USD = "10"
+PRICE_MARGIN = "0"
+RATE_LIMIT_PER_MINUTE = "30"
+DISABLED_MODELS = ""
+ALLOW_DEV_AUTH = "true"
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "knack-staging"
+# Replace with the ID printed by `wrangler d1 create knack-staging`.
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"

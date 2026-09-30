@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Paperwork Filer</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;font-family:'Instrument Sans',system-ui,sans-serif;color:#1B1A17;background:#E9E5DC}
+a{color:#8A4E0E}a:hover{color:#6B3B08}
+button,input{font-family:inherit}
+.win{width:1280px;height:800px;box-sizing:border-box;display:flex;flex-direction:column;background:#F6F3EC;border:1px solid #D6D0C3;border-radius:12px;overflow:hidden}
+.bar{height:44px;flex-shrink:0;display:flex;align-items:center;gap:8px;padding:0 16px;background:#ECE7DC;border-bottom:1px solid #DCD6CA}
+.dot{width:12px;height:12px;border-radius:6px;display:inline-block}
+.disp{font-family:'Fraunces',Georgia,serif}
+.muted{color:#5E5A52}
+.card{background:#FFFFFF;border:1px solid #E3DED3;border-radius:14px}
+.tile{display:flex;align-items:center;justify-content:center;color:#FFFFFF;flex-shrink:0}
+.btn{min-height:44px;padding:0 20px;border-radius:10px;border:0;font-size:15px;font-weight:600;cursor:pointer;box-sizing:border-box}
+.fold{display:flex;align-items:center;gap:10px;width:100%;min-height:38px;padding:0 12px;border:0;border-radius:8px;background:transparent;font-size:14px;color:#1B1A17;text-align:left;cursor:pointer}
+.row{display:grid;grid-template-columns:minmax(0, 1.6fr) 96px 80px 110px minmax(0, 1.3fr);align-items:center;gap:12px;min-height:56px;padding:0 18px;border-top:1px solid #EEE9DF;font-size:14px}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:11px;font-size:12px;font-weight:600;margin-left:8px}
+.type{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:6px;background:#F1EEE7;font-size:12px;font-weight:600;color:#3D3A34}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+</style>
+</helmet>
+<div class="win">
+  <div class="bar">
+    <span class="dot" style="background:#FF5F57"></span>
+    <span class="dot" style="background:#FEBC2E"></span>
+    <span class="dot" style="background:#28C840"></span>
+    <div style="flex-grow:1;display:flex;justify-content:center;align-items:center;gap:8px;font-size:14px;font-weight:600">
+      <span class="tile" style="width:20px;height:20px;border-radius:5px;background:#9A5B12"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M7 3h7l5 5v13H7z"></path></svg></span>Paperwork Filer
+    </div>
+    <span class="muted" style="font-size:12px">Watching Gmail and Downloads</span>
+  </div>
+
+  <div style="display:flex;flex-grow:1;min-height:0">
+    <nav aria-label="Folders" style="width:220px;flex-shrink:0;box-sizing:border-box;padding:22px 12px;display:flex;flex-direction:column;gap:2px;background:#ECE7DC;border-right:1px solid #DCD6CA">
+      <div class="muted" style="font-size:11px;font-weight:600;letter-spacing:0.6px;text-transform:uppercase;padding:0 12px 8px">Filed to</div>
+      <button class="fold" style="background:#FFFFFF;font-weight:600;box-shadow:0 1px 0 #DCD6CA"><span style="flex-grow:1">This month</span><span class="muted" style="font-size:13px">37</span></button>
+      <button class="fold"><span style="flex-grow:1">Home</span><span class="muted" style="font-size:13px">112</span></button>
+      <button class="fold"><span style="flex-grow:1">Finance</span><span class="muted" style="font-size:13px">208</span></button>
+      <button class="fold"><span style="flex-grow:1">Kids</span><span class="muted" style="font-size:13px">64</span></button>
+      <button class="fold"><span style="flex-grow:1">Car</span><span class="muted" style="font-size:13px">29</span></button>
+      <button class="fold"><span style="flex-grow:1">Taxes 2026</span><span class="muted" style="font-size:13px">41</span></button>
+      <div style="margin-top:auto;padding:0 12px;display:flex;flex-direction:column;gap:6px">
+        <div class="muted" style="font-size:12px;line-height:1.45">Files live in Documents › Paperwork, as normal folders you can open in Finder.</div>
+        <a href="#" style="font-size:13px;font-weight:600">12 filing rules</a>
+      </div>
+    </nav>
+
+    <main style="flex-grow:1;min-width:0;box-sizing:border-box;padding:26px 32px 28px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <h1 class="disp" style="margin:0;font-size:32px;font-weight:600;letter-spacing:-0.6px">Filed 37 documents this month</h1>
+          <div class="muted" style="font-size:15px">Each one renamed, sorted, and read for dates and amounts.</div>
+        </div>
+        <button class="btn" style="background:#9A5B12;color:#FFFFFF">Export tax folder for 2026</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:12px">
+        <div class="card" style="padding:16px 18px;display:flex;flex-direction:column;gap:4px;background:#FBEADF;border-color:#F0D3BF">
+          <div style="font-size:13px;font-weight:600;color:#8A3D12">Due in the next 2 weeks</div>
+          <div class="disp" style="font-size:26px;font-weight:600">2 bills · $286.40</div>
+        </div>
+        <div class="card" style="padding:16px 18px;display:flex;flex-direction:column;gap:4px">
+          <div class="muted" style="font-size:13px;font-weight:600">Needs a look</div>
+          <div class="disp" style="font-size:26px;font-weight:600">3 documents</div>
+        </div>
+        <div class="card" style="padding:16px 18px;display:flex;flex-direction:column;gap:4px">
+          <div class="muted" style="font-size:13px;font-weight:600">Possible tax items</div>
+          <div class="disp" style="font-size:26px;font-weight:600">5 this year</div>
+        </div>
+      </div>
+
+      <div class="card" style="flex-grow:1;min-height:0;overflow:hidden;display:flex;flex-direction:column">
+        <div class="row muted" style="border-top:0;min-height:40px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px">
+          <span>Document</span><span>Type</span><span>Date</span><span>Amount</span><span>Filed to</span>
+        </div>
+        <div class="row">
+          <div style="min-width:0"><span style="font-weight:600">PG&amp;E statement</span><span class="tag" style="background:#FBEADF;color:#8A3D12">Due Oct 9</span></div>
+          <div><span class="type">Bill</span></div><div class="muted">Sep 22</div><div style="font-weight:600">$148.12</div>
+          <div class="muted" style="font-size:13px">Home › Utilities › 2026</div>
+        </div>
+        <div class="row">
+          <div style="min-width:0"><span style="font-weight:600">City water &amp; sewer</span><span class="tag" style="background:#FBEADF;color:#8A3D12">Due Oct 4</span></div>
+          <div><span class="type">Bill</span></div><div class="muted">Sep 20</div><div style="font-weight:600">$138.28</div>
+          <div class="muted" style="font-size:13px">Home › Utilities › 2026</div>
+        </div>
+        <div class="row">
+          <div style="min-width:0"><span style="font-weight:600">Field trip permission form</span><span class="tag" style="background:#EFE6F0;color:#5A3060">Needs signature</span></div>
+          <div><span class="type">Form</span></div><div class="muted">Sep 19</div><div class="muted">—</div>
+          <div class="muted" style="font-size:13px">Kids › School › 2026–27</div>
+        </div>
+        <div class="row">
+          <div style="min-width:0"><span style="font-weight:600">Credit card statement</span></div>
+          <div><span class="type">Statement</span></div><div class="muted">Sep 18</div><div style="font-weight:600">$2,104.55</div>
+          <div class="muted" style="font-size:13px">Finance › Statements › 2026</div>
+        </div>
+        <div class="row">
+          <div style="min-width:0"><span style="font-weight:600">Hardware store receipt</span><span class="tag" style="background:#EFE6F0;color:#5A3060">Needs a look</span></div>
+          <div><span class="type">Receipt</span></div><div class="muted">Sep 15</div><div style="font-weight:600">$86.40</div>
+          <div class="muted" style="font-size:13px">Home › Repairs › 2026</div>
+        </div>
+        <div class="row">
+          <div style="min-width:0"><span style="font-weight:600">Car insurance renewal</span></div>
+          <div><span class="type">Policy</span></div><div class="muted">Sep 12</div><div style="font-weight:600">$712.00</div>
+          <div class="muted" style="font-size:13px">Car › Insurance</div>
+        </div>
+        <div class="row">
+          <div style="min-width:0"><span style="font-weight:600">Food bank donation</span><span class="tag" style="background:#E4EEE8;color:#1F5F4A">Tax item?</span></div>
+          <div><span class="type">Receipt</span></div><div class="muted">Sep 8</div><div style="font-weight:600">$100.00</div>
+          <div class="muted" style="font-size:13px">Taxes 2026 › Donations</div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Say It Better</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;font-family:'Instrument Sans',system-ui,sans-serif;color:#1B1A17;background:#E9E5DC}
+a{color:#3B3F8F}a:hover{color:#2A2D6B}
+button,input{font-family:inherit}
+.dot{width:12px;height:12px;border-radius:6px;display:inline-block}
+.disp{font-family:'Fraunces',Georgia,serif}
+.muted{color:#5E5A52}
+.key{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:5px;border:1px solid #CFC9BC;background:#FFFFFF;font-size:12px;font-weight:600;color:#3D3A34}
+.tone{min-height:36px;padding:0 12px;border-radius:18px;border:1px solid #D6D0C3;background:#FFFFFF;font-size:13px;font-weight:600;color:#1B1A17;cursor:pointer}
+.btn{min-height:40px;padding:0 16px;border-radius:10px;border:0;font-size:14px;font-weight:600;cursor:pointer;box-sizing:border-box}
+.msg{display:flex;gap:12px;align-items:flex-start}
+.av{width:36px;height:36px;border-radius:18px;display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-size:14px;font-weight:600;flex-shrink:0}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+</style>
+</helmet>
+<div style="width:1280px;height:800px;box-sizing:border-box;background:#CFC8B8;border-radius:12px;position:relative;overflow:hidden">
+  <div style="position:absolute;left:0;top:0;width:1280px;height:28px;background:#E7E2D6;display:flex;align-items:center;gap:18px;padding:0 16px;box-sizing:border-box;font-size:13px">
+    <span style="font-weight:600">Team Chat</span><span class="muted">File</span><span class="muted">Edit</span><span class="muted">View</span>
+    <span style="margin-left:auto;display:flex;align-items:center;gap:6px;font-weight:600;color:#3B3F8F"><span class="key" style="height:18px;font-size:11px">⌥ Space</span>Say It Better</span>
+  </div>
+
+  <div style="position:absolute;left:60px;top:64px;width:760px;height:680px;background:#FFFFFF;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.18);display:flex;flex-direction:column;overflow:hidden">
+    <div style="height:44px;display:flex;align-items:center;gap:8px;padding:0 16px;border-bottom:1px solid #E3DED3;background:#F4F1EA">
+      <span class="dot" style="background:#FF5F57"></span><span class="dot" style="background:#FEBC2E"></span><span class="dot" style="background:#28C840"></span>
+      <span style="margin-left:12px;font-size:14px;font-weight:600"># billing</span>
+    </div>
+    <div style="flex-grow:1;padding:22px 24px;display:flex;flex-direction:column;gap:18px;font-size:14px;line-height:1.5">
+      <div class="msg"><div class="av" style="background:#1E6B6B">D</div><div><div style="font-weight:600">Dana <span class="muted" style="font-weight:400;font-size:12px">10:42</span></div>Hey! Sorry, it's been a week. What did you need from me again?</div></div>
+      <div class="msg"><div class="av" style="background:#9A5B12">P</div><div><div style="font-weight:600">Priya <span class="muted" style="font-weight:400;font-size:12px">10:48</span></div>I think it's the September invoice?</div></div>
+    </div>
+    <div style="margin:0 20px 20px;border:1px solid #D6D0C3;border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.5">
+      <span style="background:#C9D6F7">ugh ok. still waiting on that invoice from last month?? can you just send it today. this is the 3rd time i've asked</span>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:700px;top:180px;width:500px;background:#FBFAF6;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,0.28);border:1px solid #D6D0C3;padding:18px 20px;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="width:28px;height:28px;border-radius:8px;background:#3B3F8F;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M4 20h4L19 9l-4-4L4 16z"></path><path d="M13.5 6.5l4 4"></path></svg></span>
+      <span class="disp" style="font-size:19px;font-weight:600;flex-grow:1">Say It Better</span>
+      <span class="muted" style="font-size:12px">Esc to close</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <button class="tone" style="background:#3B3F8F;color:#FFFFFF;border-color:#3B3F8F">Firmer, still friendly</button>
+      <button class="tone">Nicer</button>
+      <button class="tone">Shorter</button>
+      <button class="tone">Funnier</button>
+      <button class="tone">More formal</button>
+      <button class="tone">Fix typos only</button>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E3DED3;border-radius:12px;padding:14px 16px;font-size:15px;line-height:1.55">Hi Dana! Following up on the September invoice. Could you send it over today? This is my third ask, so I want to make sure it doesn't slip again. Thanks!</div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="btn" style="background:#3B3F8F;color:#FFFFFF">Replace</button>
+      <button class="btn" style="background:#FFFFFF;border:1px solid #D6D0C3;color:#1B1A17">Copy</button>
+      <button class="btn" style="background:transparent;color:#3B3F8F">Try again</button>
+      <span class="muted" style="font-size:12px;margin-left:auto">↵ to replace</span>
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;padding-top:12px;border-top:1px solid #E3DED3;font-size:12px;line-height:1.45" class="muted">
+      <svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px;margin-top:1px"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"></path></svg>
+      Sounds like you: learned from 40 messages you've sent. Only the selected text is sent to the AI.
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

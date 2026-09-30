@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tidy My Mac</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;font-family:'Instrument Sans',system-ui,sans-serif;color:#1B1A17;background:#E9E5DC}
+a{color:#2B5A8C}a:hover{color:#1F4368}
+button,input{font-family:inherit}
+.win{width:1280px;height:800px;box-sizing:border-box;display:flex;flex-direction:column;background:#F6F3EC;border:1px solid #D6D0C3;border-radius:12px;overflow:hidden}
+.bar{height:44px;flex-shrink:0;display:flex;align-items:center;gap:8px;padding:0 16px;background:#ECE7DC;border-bottom:1px solid #DCD6CA}
+.dot{width:12px;height:12px;border-radius:6px;display:inline-block}
+.disp{font-family:'Fraunces',Georgia,serif}
+.muted{color:#5E5A52}
+.card{background:#FFFFFF;border:1px solid #E3DED3;border-radius:14px}
+.tile{display:flex;align-items:center;justify-content:center;color:#FFFFFF;flex-shrink:0}
+.btn{min-height:44px;padding:0 20px;border-radius:10px;border:0;font-size:15px;font-weight:600;cursor:pointer;box-sizing:border-box}
+.grp{display:flex;gap:14px;align-items:flex-start;padding:16px 18px}
+.cb{width:18px;height:18px;accent-color:#2B5A8C;margin:3px 0 0}
+.file{display:inline-flex;align-items:center;height:24px;padding:0 8px;border-radius:6px;background:#F1EEE7;font-size:12px;color:#3D3A34}
+.dest{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600}
+.tree{display:flex;align-items:center;gap:8px;min-height:30px;font-size:14px}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+</style>
+</helmet>
+<div class="win">
+  <div class="bar">
+    <span class="dot" style="background:#FF5F57"></span>
+    <span class="dot" style="background:#FEBC2E"></span>
+    <span class="dot" style="background:#28C840"></span>
+    <div style="flex-grow:1;display:flex;justify-content:center;align-items:center;gap:8px;font-size:14px;font-weight:600">
+      <span class="tile" style="width:20px;height:20px;border-radius:5px;background:#2B5A8C"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></span>Tidy My Mac
+    </div>
+    <span class="muted" style="font-size:12px">Scanned 2 min ago</span>
+  </div>
+
+  <div style="flex-grow:1;min-height:0;box-sizing:border-box;padding:26px 36px 28px;display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h1 class="disp" style="margin:0;font-size:32px;font-weight:600;letter-spacing:-0.6px">Your Downloads folder is 38.2 GB. Here's a plan to free 21.6 GB.</h1>
+      <div class="muted" style="font-size:15px">Nothing moves until you apply it, and every change can be undone for 30 days.</div>
+    </div>
+
+    <div style="display:flex;gap:20px;flex-grow:1;min-height:0">
+      <div class="card" style="flex-grow:1;min-width:0;display:flex;flex-direction:column;overflow:hidden">
+        <div class="grp">
+          <input class="cb" type="checkbox" checked="checked" aria-label="Include installers">
+          <div style="flex-grow:1;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="font-size:16px;font-weight:600">Installers you already used</span><span style="font-size:14px;font-weight:600">12.4 GB</span></div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="file">Zoom.pkg</span><span class="file">Figma-124.dmg</span><span class="file">Logic-Pro-Update.pkg</span><span class="file">+ 20 more</span></div>
+            <span class="dest" style="color:#A2412A"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>Move to Trash</span>
+          </div>
+        </div>
+        <div class="grp" style="border-top:1px solid #EEE9DF">
+          <input class="cb" type="checkbox" checked="checked" aria-label="Include duplicates">
+          <div style="flex-grow:1;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="font-size:16px;font-weight:600">Exact duplicates · 146 files</span><span style="font-size:14px;font-weight:600">4.9 GB</span></div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="file">lease-signed (1).pdf</span><span class="file">IMG_4410 copy.heic</span><span class="file">export-final-final.wav</span></div>
+            <span class="dest" style="color:#A2412A"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>Move extra copies to Trash · keeps the newest</span>
+          </div>
+        </div>
+        <div class="grp" style="border-top:1px solid #EEE9DF">
+          <input class="cb" type="checkbox" checked="checked" aria-label="Include large videos">
+          <div style="flex-grow:1;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="font-size:16px;font-weight:600">Big videos not opened in a year · 7 files</span><span style="font-size:14px;font-weight:600">4.3 GB</span></div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="file">screen-recording-2025-03.mov</span><span class="file">webinar.mp4</span><span class="file">+ 5 more</span></div>
+            <span class="dest" style="color:#A2412A"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>Move to Trash</span>
+          </div>
+        </div>
+        <div class="grp" style="border-top:1px solid #EEE9DF">
+          <input class="cb" type="checkbox" checked="checked" aria-label="Include screenshots">
+          <div style="flex-grow:1;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="font-size:16px;font-weight:600">Screenshots · 612 files</span><span class="muted" style="font-size:14px">Sort only</span></div>
+            <span class="dest" style="color:#2B5A8C"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>Pictures › Screenshots › by month</span>
+          </div>
+        </div>
+        <div class="grp" style="border-top:1px solid #EEE9DF">
+          <input class="cb" type="checkbox" checked="checked" aria-label="Include documents">
+          <div style="flex-grow:1;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between;gap:12px"><span style="font-size:16px;font-weight:600">Documents to sort · 318 files</span><span class="muted" style="font-size:14px">Sort only</span></div>
+            <span class="dest" style="color:#2B5A8C"><svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>Documents › Finance, Home, Kids' school, Work</span>
+          </div>
+        </div>
+      </div>
+
+      <aside style="width:360px;flex-shrink:0;display:flex;flex-direction:column;gap:16px">
+        <div class="card" style="padding:20px;display:flex;flex-direction:column;gap:14px">
+          <div class="disp" style="font-size:19px;font-weight:600">Before and after</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;font-size:13px"><span class="muted">Now</span><span style="font-weight:600">38.2 GB</span></div>
+            <div style="height:12px;border-radius:6px;background:#A2412A"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between;font-size:13px"><span class="muted">After</span><span style="font-weight:600">16.6 GB</span></div>
+            <div style="height:12px;border-radius:6px;background:#ECE7DC"><div style="width:43%;height:12px;border-radius:6px;background:#2B5A8C"></div></div>
+          </div>
+        </div>
+        <div class="card" style="padding:20px;display:flex;flex-direction:column;gap:6px;flex-grow:1">
+          <div class="disp" style="font-size:19px;font-weight:600;margin-bottom:6px">New folders</div>
+          <div class="tree"><svg class="i" viewBox="0 0 24 24" style="color:#2B5A8C"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Documents</div>
+          <div class="tree" style="padding-left:26px"><span style="flex-grow:1">Finance</span><span class="muted" style="font-size:13px">94</span></div>
+          <div class="tree" style="padding-left:26px"><span style="flex-grow:1">Home</span><span class="muted" style="font-size:13px">71</span></div>
+          <div class="tree" style="padding-left:26px"><span style="flex-grow:1">Kids' school</span><span class="muted" style="font-size:13px">58</span></div>
+          <div class="tree" style="padding-left:26px"><span style="flex-grow:1">Work</span><span class="muted" style="font-size:13px">95</span></div>
+          <div class="tree"><svg class="i" viewBox="0 0 24 24" style="color:#2B5A8C"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Pictures › Screenshots</div>
+          <div class="tree" style="padding-left:26px"><span style="flex-grow:1">2026-09, 2026-08, …</span><span class="muted" style="font-size:13px">612</span></div>
+          <label style="display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:12px;border-top:1px solid #EEE9DF;font-size:14px;min-height:36px">
+            <input type="checkbox" checked="checked" style="width:18px;height:18px;accent-color:#2B5A8C;margin:0">Tidy up again every Sunday
+          </label>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn" style="background:#FFFFFF;color:#1B1A17;border:1px solid #D6D0C3;flex-grow:1">Adjust rules</button>
+          <button class="btn" style="background:#2B5A8C;color:#FFFFFF;flex-grow:1">Apply plan</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fridge Chef</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;font-family:'Instrument Sans',system-ui,sans-serif;color:#1B1A17;background:#E9E5DC}
+a{color:#A2412A}a:hover{color:#7A2F1E}
+button,input{font-family:inherit}
+.win{width:1280px;height:800px;box-sizing:border-box;display:flex;flex-direction:column;background:#F6F3EC;border:1px solid #D6D0C3;border-radius:12px;overflow:hidden}
+.bar{height:44px;flex-shrink:0;display:flex;align-items:center;gap:8px;padding:0 16px;background:#ECE7DC;border-bottom:1px solid #DCD6CA}
+.dot{width:12px;height:12px;border-radius:6px;display:inline-block}
+.disp{font-family:'Fraunces',Georgia,serif}
+.muted{color:#5E5A52}
+.card{background:#FFFFFF;border:1px solid #E3DED3;border-radius:14px}
+.tile{display:flex;align-items:center;justify-content:center;color:#FFFFFF;flex-shrink:0}
+.btn{min-height:44px;padding:0 20px;border-radius:10px;border:0;font-size:15px;font-weight:600;cursor:pointer;box-sizing:border-box}
+.chip{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:14px;background:#FFFFFF;border:1px solid #E3DED3;font-size:13px;font-weight:600}
+.filter{min-height:36px;padding:0 14px;border-radius:18px;border:1px solid #D6D0C3;background:#FFFFFF;font-size:14px;color:#1B1A17;cursor:pointer}
+.shelf{height:8px;background:#D5D8DA;border-radius:2px}
+.food{border-radius:8px;position:relative}
+.lbl{position:absolute;left:50%;top:-12px;transform:translateX(-50%);white-space:nowrap;height:22px;padding:0 8px;border-radius:11px;background:#1B1A17;color:#FFFFFF;font-size:11px;font-weight:600;display:flex;align-items:center}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+</style>
+</helmet>
+<div class="win">
+  <div class="bar">
+    <span class="dot" style="background:#FF5F57"></span>
+    <span class="dot" style="background:#FEBC2E"></span>
+    <span class="dot" style="background:#28C840"></span>
+    <div style="flex-grow:1;display:flex;justify-content:center;align-items:center;gap:8px;font-size:14px;font-weight:600">
+      <span class="tile" style="width:20px;height:20px;border-radius:5px;background:#A2412A"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><rect x="6" y="3" width="12" height="18" rx="2"></rect><path d="M6 10h12"></path></svg></span>Fridge Chef
+    </div>
+    <span class="muted" style="font-size:12px">Photo from iPhone · just now</span>
+  </div>
+
+  <div style="display:flex;flex-grow:1;min-height:0">
+    <div style="width:420px;flex-shrink:0;box-sizing:border-box;padding:24px;display:flex;flex-direction:column;gap:14px;border-right:1px solid #DCD6CA">
+      <div style="position:relative;height:420px;border-radius:14px;background:#EEF1F2;border:10px solid #C9CDD0;box-sizing:border-box;padding:28px 18px 14px;display:flex;flex-direction:column;justify-content:space-between">
+        <div style="display:flex;gap:14px;align-items:flex-end">
+          <div class="food" style="width:70px;height:56px;background:#E8C547"><span class="lbl">Eggs × 8</span></div>
+          <div class="food" style="width:46px;height:84px;background:#F4F4F0;border:1px solid #D6D0C3"><span class="lbl">Milk</span></div>
+          <div class="food" style="width:84px;height:40px;background:#F2D7A6"><span class="lbl">Cheddar</span></div>
+        </div>
+        <div class="shelf"></div>
+        <div style="display:flex;gap:14px;align-items:flex-end">
+          <div class="food" style="width:96px;height:52px;background:#E7A597"><span class="lbl">Chicken thighs</span></div>
+          <div class="food" style="width:60px;height:44px;background:#F7F3E8;border:1px solid #D6D0C3"><span class="lbl">Yogurt</span></div>
+          <div class="food" style="width:52px;height:60px;background:#C8452F"><span class="lbl">Salsa</span></div>
+        </div>
+        <div class="shelf"></div>
+        <div style="display:flex;gap:14px;align-items:flex-end">
+          <div class="food" style="width:70px;height:48px;background:#6FA05A"><span class="lbl">Spinach</span></div>
+          <div class="food" style="width:56px;height:52px;background:#E4863A"><span class="lbl">Peppers</span></div>
+          <div class="food" style="width:44px;height:44px;background:#F1E4B3"><span class="lbl">Lemon</span></div>
+          <div class="food" style="width:62px;height:36px;background:#D9C39A"><span class="lbl">Tortillas</span></div>
+        </div>
+      </div>
+      <div style="font-size:14px"><span style="font-weight:600">Found 14 things.</span> <span class="muted">Tap one to fix a mistake.</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        <span class="chip">Pantry: rice, pasta, beans</span>
+        <span class="chip">+ Add what's missing</span>
+      </div>
+    </div>
+
+    <main style="flex-grow:1;min-width:0;box-sizing:border-box;padding:24px 32px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px">
+        <h1 class="disp" style="margin:0;font-size:32px;font-weight:600;letter-spacing:-0.6px">Three dinners you can make tonight</h1>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="filter" style="background:#1B1A17;color:#FFFFFF;border-color:#1B1A17">Under 30 min</button>
+        <button class="filter" style="background:#1B1A17;color:#FFFFFF;border-color:#1B1A17">Kid friendly</button>
+        <button class="filter">Vegetarian</button>
+        <button class="filter">Use it up first</button>
+        <button class="filter">Serves 5</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:14px;flex-grow:1;min-height:0">
+        <div class="card" style="display:flex;flex-direction:column;overflow:hidden">
+          <div style="height:150px;background:#E7A597;display:flex;align-items:flex-end;padding:12px;box-sizing:border-box"><span class="chip" style="border:0">[Dish photo]</span></div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:8px;flex-grow:1">
+            <div style="font-size:18px;font-weight:600">Chicken quesadillas</div>
+            <div class="muted" style="font-size:13px">25 min · uses 6 things you have</div>
+            <div style="font-size:13px;line-height:1.5">Chicken, peppers, cheddar, tortillas, salsa, yogurt as sour cream</div>
+            <div style="font-size:13px;color:#1F5F4A;font-weight:600">Nothing to buy</div>
+            <button class="btn" style="margin-top:auto;background:#A2412A;color:#FFFFFF">Cook this</button>
+          </div>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;overflow:hidden">
+          <div style="height:150px;background:#E8C547;display:flex;align-items:flex-end;padding:12px;box-sizing:border-box"><span class="chip" style="border:0">[Dish photo]</span></div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:8px;flex-grow:1">
+            <div style="font-size:18px;font-weight:600">Spinach &amp; cheddar frittata</div>
+            <div class="muted" style="font-size:13px">20 min · uses 5 things you have</div>
+            <div style="font-size:13px;line-height:1.5">Eggs, spinach, cheddar, milk, peppers</div>
+            <div style="font-size:13px;color:#1F5F4A;font-weight:600">Uses the spinach before it turns</div>
+            <button class="btn" style="margin-top:auto;background:#FFFFFF;color:#1B1A17;border:1px solid #D6D0C3">Cook this</button>
+          </div>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;overflow:hidden">
+          <div style="height:150px;background:#F1E4B3;display:flex;align-items:flex-end;padding:12px;box-sizing:border-box"><span class="chip" style="border:0">[Dish photo]</span></div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:8px;flex-grow:1">
+            <div style="font-size:18px;font-weight:600">Lemon chicken rice bowls</div>
+            <div class="muted" style="font-size:13px">30 min · uses 5 things you have</div>
+            <div style="font-size:13px;line-height:1.5">Chicken, lemon, rice, spinach, yogurt sauce</div>
+            <div style="font-size:13px;color:#8A3D12;font-weight:600">Missing: garlic (optional)</div>
+            <button class="btn" style="margin-top:auto;background:#FFFFFF;color:#1B1A17;border:1px solid #D6D0C3">Cook this</button>
+          </div>
+        </div>
+      </div>
+      <div class="muted" style="font-size:13px">Cook mode shows one step at a time, big enough to read from the stove, with timers.</div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

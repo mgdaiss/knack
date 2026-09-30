@@ -1,0 +1,15 @@
+{
+  "id": "com.knack.say-it-better",
+  "name": "Say It Better",
+  "tagline": "Select any text, press ⌥Space, pick a tone.",
+  "character": { "asset": "say-it-better", "color": "#5B61C9", "tint": "#EEF0FB" },
+  "category": "writing",
+  "permissions": ["selection.read", "selection.replace", "model.text"],
+  "never": ["files.read", "email.read", "network.other"],
+  "triggers": [
+    { "type": "hotkey", "shortcut": "option+space" },
+    { "type": "route", "examples": ["make this nicer", "say this better", "rewrite this", "make this more polite", "fix my typos"] }
+  ],
+  "model": { "tier": "text-fast", "maxCostPerRunUSD": 0.01 },
+  "version": "1.0.0"
+}

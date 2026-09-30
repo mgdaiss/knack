@@ -1,0 +1,15 @@
+{
+  "id": "com.knack.fridge-chef",
+  "name": "Fridge Chef",
+  "tagline": "Snap your fridge. Three dinners you can make tonight.",
+  "character": { "asset": "fridge-chef", "color": "#E06A4E", "tint": "#FBE0D8" },
+  "category": "home",
+  "permissions": ["image.input", "model.vision", "notifications"],
+  "never": ["files.read", "email.read", "network.other"],
+  "triggers": [
+    { "type": "window" },
+    { "type": "route", "examples": ["what's for dinner", "what can I cook", "dinner ideas", "what should I make tonight"] }
+  ],
+  "model": { "tier": "vision-fast", "maxCostPerRunUSD": 0.02 },
+  "version": "1.0.0"
+}

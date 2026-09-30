@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+  Debug builds skip the Sign in with Apple entitlement so the app builds and runs without a
+  development team or provisioning profile. Use "Use a test account" on the sign-in screen.
+  To test Sign in with Apple locally, set DEVELOPMENT_TEAM and point Debug at Knack.entitlements.
+-->
+<dict/>
+</plist>

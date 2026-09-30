@@ -1,0 +1,21 @@
+{
+  "text-fast": {
+    "model": "google/gemini-2.5-flash-lite",
+    "maxTokens": 1024,
+    "usdPerMTokIn": 0.10,
+    "usdPerMTokOut": 0.40
+  },
+  "text-smart": {
+    "model": "anthropic/claude-haiku-4.5",
+    "maxTokens": 2048,
+    "usdPerMTokIn": 1.00,
+    "usdPerMTokOut": 5.00
+  },
+  "vision-fast": {
+    "model": "google/gemini-2.5-flash",
+    "maxTokens": 4096,
+    "usdPerMTokIn": 0.30,
+    "usdPerMTokOut": 2.50,
+    "vision": true
+  }
+}

@@ -1,0 +1,3 @@
+# Copy to .dev.vars for `wrangler dev`. Never commit .dev.vars.
+OPENROUTER_API_KEY=sk-or-...
+ALLOW_DEV_AUTH=true

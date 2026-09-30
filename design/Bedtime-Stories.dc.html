@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bedtime Story Studio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;font-family:'Instrument Sans',system-ui,sans-serif;color:#1B1A17;background:#E9E5DC}
+a{color:#6B3D6E}a:hover{color:#4F2C52}
+button,input{font-family:inherit}
+.win{width:1280px;height:800px;box-sizing:border-box;display:flex;flex-direction:column;background:#F6F3EC;border:1px solid #D6D0C3;border-radius:12px;overflow:hidden}
+.bar{height:44px;flex-shrink:0;display:flex;align-items:center;gap:8px;padding:0 16px;background:#ECE7DC;border-bottom:1px solid #DCD6CA}
+.dot{width:12px;height:12px;border-radius:6px;display:inline-block}
+.disp{font-family:'Fraunces',Georgia,serif}
+.muted{color:#5E5A52}
+.tile{display:flex;align-items:center;justify-content:center;color:#FFFFFF;flex-shrink:0}
+.btn{min-height:44px;padding:0 20px;border-radius:10px;border:0;font-size:15px;font-weight:600;cursor:pointer;box-sizing:border-box}
+.lab{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:#5E5A52}
+.hero{display:flex;align-items:center;gap:8px;min-height:40px;padding:0 12px 0 6px;border-radius:20px;background:#FFFFFF;border:1px solid #E3DED3;font-size:14px;font-weight:600}
+.av{width:28px;height:28px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-size:12px;font-weight:600}
+.opt{min-height:40px;padding:0 12px;border-radius:10px;border:1px solid #D6D0C3;background:#FFFFFF;font-size:14px;color:#1B1A17;cursor:pointer;text-align:left}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+</style>
+</helmet>
+<div class="win">
+  <div class="bar">
+    <span class="dot" style="background:#FF5F57"></span>
+    <span class="dot" style="background:#FEBC2E"></span>
+    <span class="dot" style="background:#28C840"></span>
+    <div style="flex-grow:1;display:flex;justify-content:center;align-items:center;gap:8px;font-size:14px;font-weight:600">
+      <span class="tile" style="width:20px;height:20px;border-radius:5px;background:#6B3D6E"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg></span>Bedtime Story Studio
+    </div>
+    <span class="muted" style="font-size:12px">Tonight's story</span>
+  </div>
+
+  <div style="display:flex;flex-grow:1;min-height:0">
+    <aside style="width:320px;flex-shrink:0;box-sizing:border-box;padding:24px;display:flex;flex-direction:column;gap:18px;border-right:1px solid #DCD6CA;background:#ECE7DC">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="lab">Starring</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span class="hero"><span class="av" style="background:#6B3D6E">A</span>Ava</span>
+          <span class="hero"><span class="av" style="background:#1E6B6B">L</span>Leo</span>
+          <span class="hero"><span class="av" style="background:#9A5B12">P</span>Pip the dog</span>
+          <button class="hero" style="color:#6B3D6E;cursor:pointer;padding:0 12px">+ Add</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="lab">Adventure</div>
+        <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:6px">
+          <button class="opt" style="background:#6B3D6E;color:#FFFFFF;border-color:#6B3D6E">Under the sea</button>
+          <button class="opt">Space trip</button>
+          <button class="opt">Dinosaur day</button>
+          <button class="opt">Surprise me</button>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label class="lab" for="lesson">Something from today</label>
+        <input id="lesson" value="Leo was nervous about swim lessons" style="min-height:40px;border:1px solid #D6D0C3;border-radius:10px;padding:0 12px;font-size:14px;background:#FFFFFF">
+        <div class="muted" style="font-size:12px;line-height:1.4">Woven gently into the story. Optional.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="lab">Length</div>
+        <div style="display:flex;gap:6px">
+          <button class="opt" style="flex-grow:1;text-align:center">5 min</button>
+          <button class="opt" style="flex-grow:1;text-align:center;background:#6B3D6E;color:#FFFFFF;border-color:#6B3D6E">10 min</button>
+          <button class="opt" style="flex-grow:1;text-align:center">15 min</button>
+        </div>
+      </div>
+      <button class="btn" style="margin-top:auto;background:#FFFFFF;color:#6B3D6E;border:1px solid #CDB8CF">New story</button>
+    </aside>
+
+    <main style="flex-grow:1;min-width:0;box-sizing:border-box;padding:24px 32px;display:flex;flex-direction:column;gap:16px;background:#2A2440">
+      <div style="display:flex;align-items:center;justify-content:space-between;color:#FFFFFF">
+        <div class="disp" style="font-size:26px;font-weight:600">Ava, Leo and the Brave Little Wave</div>
+        <div style="font-size:13px;color:#D8CFE6">Page 3 of 8</div>
+      </div>
+      <div style="flex-grow:1;min-height:0;display:flex;border-radius:14px;overflow:hidden;background:#FBF6EC;box-shadow:0 10px 30px rgba(0,0,0,0.35)">
+        <div style="width:50%;position:relative;background:#BFE0E6;overflow:hidden">
+          <svg viewBox="0 0 440 500" style="width:100%;height:100%;display:block" preserveAspectRatio="xMidYMid slice" aria-label="Illustration: two children and a dog at the shore at dusk">
+            <rect x="0" y="0" width="440" height="500" fill="#BFE0E6"></rect>
+            <circle cx="340" cy="90" r="38" fill="#FBEFC4"></circle>
+            <path d="M0 290 Q 110 250 220 290 T 440 290 V500 H0 Z" fill="#5FA3B5"></path>
+            <path d="M0 330 Q 110 300 220 330 T 440 330 V500 H0 Z" fill="#3F7F95"></path>
+            <path d="M0 420 Q 120 390 260 420 T 440 410 V500 H0 Z" fill="#EBD7A8"></path>
+            <circle cx="150" cy="352" r="16" fill="#8C5A3C"></circle>
+            <rect x="136" y="368" width="28" height="44" rx="10" fill="#E0694A"></rect>
+            <circle cx="210" cy="360" r="13" fill="#6B4A36"></circle>
+            <rect x="198" y="373" width="24" height="36" rx="9" fill="#F2C14E"></rect>
+            <ellipse cx="262" cy="400" rx="20" ry="12" fill="#A87A4F"></ellipse>
+            <circle cx="278" cy="390" r="9" fill="#A87A4F"></circle>
+            <path d="M300 300 q 20 -30 50 -10 q -20 0 -30 20 z" fill="#FFFFFF" opacity="0.85"></path>
+          </svg>
+        </div>
+        <div style="width:50%;box-sizing:border-box;padding:40px 44px;display:flex;flex-direction:column;gap:18px">
+          <p class="disp" style="margin:0;font-size:21px;line-height:1.6;color:#2A2440">The waves looked very big from the sand. Leo held Pip's leash tight and whispered, "What if the water is too deep?"</p>
+          <p class="disp" style="margin:0;font-size:21px;line-height:1.6;color:#2A2440">Ava knelt down beside him. "Big waves are just small waves that practiced," she said. "Let's practice with a small one first."</p>
+          <p class="disp" style="margin:0;font-size:21px;line-height:1.6;color:#2A2440">Just then, a tiny wave rolled up and tickled their toes, and Pip barked hello.</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;color:#FFFFFF">
+        <button class="btn" aria-label="Previous page" style="background:#3E3660;color:#FFFFFF;padding:0 14px"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg></button>
+        <button class="btn" style="background:#FFFFFF;color:#2A2440;display:flex;align-items:center;gap:8px"><svg class="i" viewBox="0 0 24 24"><path d="M7 5l12 7-12 7z"></path></svg>Read aloud</button>
+        <button class="btn" style="background:#3E3660;color:#FFFFFF">Voice: Calm narrator</button>
+        <button class="btn" aria-label="Next page" style="background:#3E3660;color:#FFFFFF;padding:0 14px"><svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
+        <span style="margin-left:auto;font-size:13px;color:#D8CFE6">Saved to your family's story shelf · print as a book anytime</span>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

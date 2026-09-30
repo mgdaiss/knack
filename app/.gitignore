@@ -1,0 +1,6 @@
+Knack.xcodeproj/
+build/
+.build/
+DerivedData/
+*.xcuserstate
+xcuserdata/

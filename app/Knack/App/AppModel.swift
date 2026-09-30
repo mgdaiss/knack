@@ -1,0 +1,165 @@
+import AuthenticationServices
+import KnackCore
+import Observation
+import SwiftUI
+
+/// App-wide state: account, skills, model routing and navigation.
+@MainActor
+@Observable
+final class AppModel {
+    enum Section: Hashable {
+        case home, discover, settings
+    }
+
+    var section: Section = .home
+
+    let registry: SkillRegistry
+    let cloud: KnackCloudClient
+    let usage: UsageLog
+    private(set) var router: ModelRouter
+
+    private(set) var isSignedIn: Bool
+    private(set) var account: Account?
+    private(set) var accountError: KnackError?
+    /// Successful runs per skill over the last 7 days, from the local usage log.
+    private(set) var weekCounts: [String: Int] = [:]
+
+    /// Onboarding is finished once the user has signed in and seen the welcome steps.
+    var onboardingComplete: Bool {
+        didSet { UserDefaults.standard.set(onboardingComplete, forKey: Keys.onboardingComplete) }
+    }
+
+    /// Given name from Sign in with Apple (only sent the first time). Kept on this Mac only.
+    var givenName: String? {
+        didSet { UserDefaults.standard.set(givenName, forKey: Keys.givenName) }
+    }
+
+    #if DEBUG
+    /// DEBUG only: route model calls straight to OpenRouter with the developer's own key.
+    var useDirectProvider: Bool {
+        didSet {
+            UserDefaults.standard.set(useDirectProvider, forKey: Keys.useDirectProvider)
+            router = Self.makeRouter(cloud: cloud, usage: usage, direct: useDirectProvider)
+        }
+    }
+    #endif
+
+    private enum Keys {
+        static let onboardingComplete = "onboarding.complete"
+        static let givenName = "profile.givenName"
+        static let useDirectProvider = "debug.useDirectProvider"
+        static let devDeviceID = "debug.deviceID"
+    }
+
+    init() {
+        let defaults = UserDefaults.standard
+        registry = SkillRegistry(store: UserDefaultsInstallStateStore())
+        registry.load(from: AppConfig.bundledSkillsDirectory)
+        cloud = KnackCloudClient(baseURL: AppConfig.cloudURL, store: KeychainSessionStore())
+        usage = UsageLog(fileURL: AppConfig.applicationSupport.appendingPathComponent("usage.json"))
+        isSignedIn = cloud.isSignedIn
+        onboardingComplete = defaults.bool(forKey: Keys.onboardingComplete)
+        givenName = defaults.string(forKey: Keys.givenName)
+        #if DEBUG
+        let direct = defaults.bool(forKey: Keys.useDirectProvider)
+        useDirectProvider = direct
+        router = Self.makeRouter(cloud: cloud, usage: usage, direct: direct)
+        #else
+        router = Self.makeRouter(cloud: cloud, usage: usage, direct: false)
+        #endif
+    }
+
+    private static func makeRouter(cloud: KnackCloudClient, usage: UsageLog, direct: Bool) -> ModelRouter {
+        #if DEBUG
+        if direct, let tiers = AppConfig.bundledTierMap() {
+            let provider = DirectOpenRouterProvider(apiKey: {
+                guard let key = DeveloperKeyStore.key else { throw KnackError.notSignedIn }
+                return key
+            }, tiers: tiers)
+            return ModelRouter(provider: provider, usage: usage)
+        }
+        #endif
+        return ModelRouter(provider: KnackCloudProvider(client: cloud), usage: usage)
+    }
+
+    var needsOnboarding: Bool { !isSignedIn || !onboardingComplete }
+
+    // MARK: Skills
+
+    /// The runtime services for a skill, limited to what its manifest declares.
+    func context(for manifest: SkillManifest) -> SkillContext {
+        SkillContext(manifest: manifest, services: RuntimeServices(router: router))
+    }
+
+    // MARK: Account
+
+    func signInWithApple(_ credential: ASAuthorizationAppleIDCredential) async throws {
+        guard let tokenData = credential.identityToken, let token = String(data: tokenData, encoding: .utf8) else {
+            throw KnackError.unauthorized
+        }
+        if let name = credential.fullName?.givenName, !name.isEmpty { givenName = name }
+        _ = try await cloud.signInWithApple(identityToken: token)
+        didSignIn()
+    }
+
+    /// Staging/debug test account tied to this Mac.
+    func devSignIn() async throws {
+        let defaults = UserDefaults.standard
+        let deviceID = defaults.string(forKey: Keys.devDeviceID) ?? UUID().uuidString
+        defaults.set(deviceID, forKey: Keys.devDeviceID)
+        _ = try await cloud.devSignIn(deviceId: deviceID)
+        didSignIn()
+    }
+
+    private func didSignIn() {
+        isSignedIn = true
+        accountError = nil
+        Task { await refreshAccount() }
+    }
+
+    func signOut() {
+        cloud.signOut()
+        isSignedIn = false
+        account = nil
+        onboardingComplete = false
+    }
+
+    func refreshAccount() async {
+        guard isSignedIn else { return }
+        do {
+            account = try await cloud.me()
+            accountError = nil
+        } catch let error as KnackError {
+            accountError = error
+            if error == .notSignedIn { isSignedIn = false }
+        } catch {
+            accountError = .server
+        }
+    }
+
+    func refreshUsage() async {
+        let weekAgo = Calendar.current.date(byAdding: .day, value: -7, to: .now) ?? .now
+        weekCounts = await usage.runCounts(since: weekAgo)
+    }
+
+    func clearHistory() async {
+        await usage.clear()
+        await refreshUsage()
+    }
+
+    // MARK: URLs
+
+    /// `knack://open/<skill-id>` (app shims, Phase 2) and `knack://account/refresh` (after a top-up).
+    func handleURL(_ url: URL) {
+        guard url.scheme == "knack" else { return }
+        switch url.host {
+        case "account":
+            Task { await refreshAccount() }
+        case "open":
+            let id = url.pathComponents.dropFirst().first ?? ""
+            if registry.manifest(id: id) != nil { section = .home }
+        default:
+            break
+        }
+    }
+}

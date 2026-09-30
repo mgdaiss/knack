@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Form Filler</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;font-family:'Instrument Sans',system-ui,sans-serif;color:#1B1A17;background:#E9E5DC}
+a{color:#3B3F8F}a:hover{color:#2A2D6B}
+button,input,textarea{font-family:inherit}
+.win{width:1280px;height:800px;box-sizing:border-box;display:flex;flex-direction:column;background:#F6F3EC;border:1px solid #D6D0C3;border-radius:12px;overflow:hidden}
+.bar{height:44px;flex-shrink:0;display:flex;align-items:center;gap:8px;padding:0 16px;background:#ECE7DC;border-bottom:1px solid #DCD6CA}
+.dot{width:12px;height:12px;border-radius:6px;display:inline-block}
+.disp{font-family:'Fraunces',Georgia,serif}
+.muted{color:#5E5A52}
+.card{background:#FFFFFF;border:1px solid #E3DED3;border-radius:14px}
+.tile{display:flex;align-items:center;justify-content:center;color:#FFFFFF;flex-shrink:0}
+.btn{min-height:44px;padding:0 20px;border-radius:10px;border:0;font-size:15px;font-weight:600;cursor:pointer;box-sizing:border-box}
+.fl{display:flex;flex-direction:column;gap:3px}
+.lab{font-size:10px;font-weight:600;letter-spacing:0.4px;text-transform:uppercase;color:#6B675F}
+.val{min-height:26px;box-sizing:border-box;padding:3px 6px;border-bottom:1px solid #9C978C;font-size:14px;color:#2C3F9C;background:#EEF0FA}
+.miss{min-height:26px;box-sizing:border-box;padding:3px 6px;border:2px dashed #C0661E;border-radius:4px;background:#FDF1E6;font-size:12px;font-weight:600;color:#8A3D12}
+.src{display:flex;align-items:center;gap:10px;min-height:36px;font-size:14px}
+svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+</style>
+</helmet>
+<div class="win">
+  <div class="bar">
+    <span class="dot" style="background:#FF5F57"></span>
+    <span class="dot" style="background:#FEBC2E"></span>
+    <span class="dot" style="background:#28C840"></span>
+    <div style="flex-grow:1;display:flex;justify-content:center;align-items:center;gap:8px;font-size:14px;font-weight:600">
+      <span class="tile" style="width:20px;height:20px;border-radius:5px;background:#3B3F8F"><svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M7 3v18h6"></path><path d="M7 3h7l5 5v5"></path><path d="M17.5 14.5l2 2-5 5h-2v-2z"></path></svg></span>Form Filler
+    </div>
+    <span class="muted" style="font-size:12px">Drop a PDF anywhere</span>
+  </div>
+
+  <div style="display:flex;flex-grow:1;min-height:0">
+    <div style="flex-grow:1;min-width:0;background:#E2DDD2;display:flex;justify-content:center;padding:22px 0;box-sizing:border-box">
+      <div style="width:560px;height:100%;box-sizing:border-box;background:#FFFFFF;box-shadow:0 2px 10px rgba(0,0,0,0.12);padding:34px 40px;display:flex;flex-direction:column;gap:16px;font-family:Georgia,serif">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #1B1A17;padding-bottom:10px">
+          <div>
+            <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#5E5A52">Oak Hill Elementary</div>
+            <div style="font-size:22px;font-weight:600">Field Trip Permission</div>
+          </div>
+          <div style="font-size:12px;color:#5E5A52">Page 1 of 2</div>
+        </div>
+        <div style="font-size:12px;line-height:1.5;color:#3D3A34">Grade 2 visit to the Natural History Museum, Thursday October 16. Please return by October 10.</div>
+        <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:14px 20px;font-family:'Instrument Sans',system-ui,sans-serif">
+          <div class="fl"><span class="lab">Student name</span><div class="val">Ava Rivera</div></div>
+          <div class="fl"><span class="lab">Grade / Teacher</span><div class="val">2 · Ms. Okafor</div></div>
+          <div class="fl"><span class="lab">Date of birth</span><div class="val">04/12/2019</div></div>
+          <div class="fl"><span class="lab">Parent / guardian</span><div class="val">Sam Rivera</div></div>
+          <div class="fl"><span class="lab">Phone</span><div class="val">(555) 014-2271</div></div>
+          <div class="fl"><span class="lab">Email</span><div class="val">sam@example.com</div></div>
+          <div class="fl" style="grid-column:span 2"><span class="lab">Emergency contact (not a parent)</span><div class="val">Jordan Lee, aunt · (555) 014-8830</div></div>
+          <div class="fl" style="grid-column:span 2"><span class="lab">Health insurance</span><div class="val">Plan on file · member ID ••••4412</div></div>
+          <div class="fl" style="grid-column:span 2"><span class="lab">Allergies or medical notes</span><div class="miss">Needs you</div></div>
+          <div class="fl" style="grid-column:span 2"><span class="lab">Can you chaperone?</span><div class="miss">Needs you</div></div>
+        </div>
+        <div style="margin-top:auto;display:grid;grid-template-columns:minmax(0, 2fr) minmax(0, 1fr);gap:20px;font-family:'Instrument Sans',system-ui,sans-serif">
+          <div class="fl"><span class="lab">Parent signature</span><div class="miss" style="min-height:40px">Needs you</div></div>
+          <div class="fl"><span class="lab">Date</span><div class="val">09/29/2026</div></div>
+        </div>
+      </div>
+    </div>
+
+    <aside style="width:400px;flex-shrink:0;box-sizing:border-box;padding:24px;display:flex;flex-direction:column;gap:16px;border-left:1px solid #DCD6CA">
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div class="disp" style="font-size:22px;font-weight:600">Field Trip Permission.pdf</div>
+        <div class="muted" style="font-size:13px">From Ms. Okafor's email · due Oct 10</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;justify-content:space-between;font-size:14px"><span style="font-weight:600">18 of 21 fields filled</span><span class="muted">3 left</span></div>
+        <div style="height:8px;border-radius:4px;background:#E3DED3"><div style="width:86%;height:8px;border-radius:4px;background:#3B3F8F"></div></div>
+      </div>
+
+      <div class="card" style="padding:16px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-size:14px;font-weight:600;color:#8A3D12">Needs you</div>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600">Allergies or medical notes
+          <textarea rows="2" placeholder="e.g. None, or peanut allergy" style="resize:none;border:1px solid #D6D0C3;border-radius:8px;padding:8px 10px;font-size:14px;font-weight:400;color:#1B1A17"></textarea>
+        </label>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:13px;font-weight:600">Can you chaperone?</div>
+          <div style="display:flex;gap:8px">
+            <button class="btn" style="flex-grow:1;min-height:40px;background:#FFFFFF;border:1px solid #D6D0C3;color:#1B1A17">Yes</button>
+            <button class="btn" style="flex-grow:1;min-height:40px;background:#FFFFFF;border:1px solid #D6D0C3;color:#1B1A17">No</button>
+          </div>
+        </div>
+        <button class="btn" style="min-height:40px;background:#EEF0FA;color:#3B3F8F;display:flex;align-items:center;justify-content:center;gap:8px"><svg class="i" viewBox="0 0 24 24"><path d="M3 17c3-4 5-9 7-9s-1 9 2 9 3-4 5-4 1 3 4 3"></path></svg>Sign with my saved signature</button>
+      </div>
+
+      <div style="display:flex;flex-direction:column">
+        <div class="muted" style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Filled from your household</div>
+        <div class="src"><span class="tile" style="width:26px;height:26px;border-radius:13px;background:#6B3D6E;font-size:12px;font-weight:600">A</span><span style="flex-grow:1">Ava · child</span><a href="#" style="font-size:13px;font-weight:600">Edit</a></div>
+        <div class="src"><span class="tile" style="width:26px;height:26px;border-radius:13px;background:#1E6B6B;font-size:12px;font-weight:600">S</span><span style="flex-grow:1">Sam · you</span><a href="#" style="font-size:13px;font-weight:600">Edit</a></div>
+        <div class="src"><span class="tile" style="width:26px;height:26px;border-radius:13px;background:#9A5B12;font-size:12px;font-weight:600">J</span><span style="flex-grow:1">Jordan Lee · emergency contact</span><a href="#" style="font-size:13px;font-weight:600">Edit</a></div>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45" class="muted">
+        <svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px;margin-top:1px"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path></svg>
+        The AI saw this form's field labels, not your answers. Your profile stays encrypted on this Mac.
+      </div>
+
+      <div style="margin-top:auto;display:flex;gap:10px">
+        <button class="btn" style="background:#FFFFFF;color:#1B1A17;border:1px solid #D6D0C3">Print</button>
+        <button class="btn" style="background:#3B3F8F;color:#FFFFFF;flex-grow:1">Save &amp; reply to teacher</button>
+      </div>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

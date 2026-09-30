@@ -1,0 +1,40 @@
+{
+  "recipes": [
+    {
+      "title": "Spinach & Feta Omelette",
+      "summary": "Fluffy eggs with the spinach that needs using.",
+      "minutes": 15, "serves": 2, "vegetarian": true, "kidFriendly": true,
+      "usesUp": ["spinach", "feta"],
+      "ingredients": [{ "name": "eggs", "amount": "4" }, { "name": "spinach", "amount": "2 handfuls" }, { "name": "feta" }],
+      "steps": [
+        { "text": "Whisk the eggs with a pinch of salt." },
+        { "text": "Wilt the spinach in a hot pan.", "timerSeconds": 120 },
+        { "text": "Add eggs, crumble feta, fold and serve.", "timerSeconds": 180 }
+      ]
+    },
+    {
+      "title": "Chicken Stir-Fry",
+      "summary": "Quick, crunchy and saucy.",
+      "minutes": 25, "serves": 3, "vegetarian": false, "kidFriendly": true,
+      "usesUp": ["chicken", "peppers"],
+      "ingredients": [{ "name": "chicken thighs", "amount": "400 g" }, { "name": "peppers", "amount": "2" }, { "name": "soy sauce", "amount": "3 tbsp" }],
+      "steps": [
+        { "text": "Slice chicken and peppers." },
+        { "text": "Stir-fry chicken until golden.", "timerSeconds": 360 },
+        { "text": "Add peppers and soy sauce, toss.", "timerSeconds": 180 }
+      ]
+    },
+    {
+      "title": "Tomato Pasta",
+      "summary": "A pantry classic.",
+      "minutes": 20, "serves": 4, "vegetarian": true, "kidFriendly": true,
+      "usesUp": ["tomatoes"],
+      "ingredients": [{ "name": "pasta", "amount": "400 g" }, { "name": "tomatoes", "amount": "4" }],
+      "steps": [
+        { "text": "Boil the pasta.", "timerSeconds": 600 },
+        { "text": "Simmer chopped tomatoes with garlic and olive oil." },
+        { "text": "Toss together and serve." }
+      ]
+    }
+  ]
+}
